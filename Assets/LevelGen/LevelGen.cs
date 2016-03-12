@@ -117,9 +117,10 @@ public class LevelGen : NetworkBehaviour
     [SyncVar] int seed;
     public int size = 5;
     public int tileSize = 3;
-    public int height = 3;
 
     public GameObject wall;
+    public GameObject pillar;
+    public GameObject ground;
 
     ChunkVert[,] verts;
 
@@ -246,32 +247,37 @@ public class LevelGen : NetworkBehaviour
             {
                 if (realTiles[z, x])
                 {
-                    GameObject temp = (GameObject)GameObject.Instantiate(wall);
-                    GameObjectUtility.SetStaticEditorFlags(temp, StaticEditorFlags.NavigationStatic);
-                    GameObjectUtility.SetNavMeshArea(temp, GameObjectUtility.GetNavMeshAreaFromName("Not Walkable"));
-                    temp.transform.position = new Vector3(xPos, height / 2, zPos);
-                    Vector3 newScale = Vector3.one;
-                    if (x % 2 == 1)
-                        newScale.x = tileSize;
-                    if (z % 2 == 1)
-                        newScale.z = tileSize;
-                    newScale.y = height;
-                    temp.transform.localScale = newScale;
-                    temp.transform.parent = transform;
-                    temp.layer = LayerMask.NameToLayer("Wall");
+                    Vector3 position = new Vector3(xPos, 0, zPos);
+
+                    if (x % 2 == 1 || z % 2 == 1)
+                    {
+                        GameObject tempWall = (GameObject)GameObject.Instantiate(wall, position, Quaternion.identity);
+                        tempWall.transform.parent = transform;
+                        tempWall.layer = LayerMask.NameToLayer("Wall");
+                        if (z % 2 == 1)
+                            tempWall.transform.rotation = Quaternion.Euler(0, 90, 0);
+                        GameObjectUtility.SetStaticEditorFlags(tempWall, StaticEditorFlags.NavigationStatic);
+                        GameObjectUtility.SetNavMeshArea(tempWall, GameObjectUtility.GetNavMeshAreaFromName("Not Walkable"));
+                    } else
+                    {
+                        GameObject tempPillar = (GameObject)GameObject.Instantiate(pillar, position, Quaternion.identity);
+                        GameObjectUtility.SetStaticEditorFlags(tempPillar, StaticEditorFlags.NavigationStatic);
+                        GameObjectUtility.SetNavMeshArea(tempPillar, GameObjectUtility.GetNavMeshAreaFromName("Not Walkable"));
+                        tempPillar.transform.parent = transform;
+                        tempPillar.layer = LayerMask.NameToLayer("Wall");
+                    }
                 }
                 xPos += (1 + tileSize) / 2;
             }
             zPos += (1 + tileSize) / 2;
         }
-        GameObject plane = (GameObject)GameObject.CreatePrimitive(PrimitiveType.Quad);
+        GameObject plane = (GameObject)GameObject.Instantiate(ground);
         GameObjectUtility.SetStaticEditorFlags(plane, StaticEditorFlags.NavigationStatic);
         GameObjectUtility.SetNavMeshArea(plane, GameObjectUtility.GetNavMeshAreaFromName("Walkable"));
-        float realWorldSize = tileGridSize * (1 + tileSize) / 2 - .5f;
-        plane.transform.position = new Vector3(realWorldSize / 2, 0, realWorldSize / 2);
+        float realWorldSize = tileGridSize * (1 + tileSize) / 2 - 1.5f;
+        plane.transform.position = new Vector3(realWorldSize / 2 - .5f, 0, realWorldSize / 2 - .5f);
         plane.transform.localScale = Vector3.one * realWorldSize;
         plane.transform.rotation = Quaternion.Euler(90, 0, 0);        
-        plane.GetComponent<MeshRenderer>().material.color = Color.gray;
         plane.transform.parent = transform;
         plane.layer = LayerMask.NameToLayer("Ground");
         NavMeshBuilder.BuildNavMesh();
