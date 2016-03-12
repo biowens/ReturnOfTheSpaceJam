@@ -2,8 +2,12 @@
 using System.Collections;
 
 public class CollisionAlert : MonoBehaviour {
+	Material origMaterial;
+
 	void Awake() {
+		origMaterial = GetComponent<Renderer> ().material;
 		DirectorController.S.setIsPlaceable (true);
+
 	}
 
 	void OnCollisionStay(Collision coll) {
@@ -12,5 +16,9 @@ public class CollisionAlert : MonoBehaviour {
 
 	void OnCollisionExit(Collision coll) {
 		DirectorController.S.setIsPlaceable (true);
+	}
+
+	public void resetMat() {
+		GetComponent<Renderer> ().material = origMaterial;
 	}
 }
