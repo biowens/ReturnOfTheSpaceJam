@@ -7,7 +7,7 @@ public class DirectorCamScript : MonoBehaviour {
 	public float zoomInMult;
 	float zoomInCamSize;
 
-	float prevMouseX, prevMouseY;
+	//float prevMouseX, prevMouseY;
 	public float timeTilZoomOut;
 	float lastMouseMoveTime;
 
@@ -24,8 +24,10 @@ public class DirectorCamScript : MonoBehaviour {
 		directorCam.orthographicSize = defaultCamSize;
 		zoomInCamSize = defaultCamSize / zoomInMult;
 
+		/*
 		prevMouseX = Input.mousePosition.x;
 		prevMouseY = Input.mousePosition.y;
+		*/
 
 		lastMouseMoveTime = -10f;
 	}
@@ -33,11 +35,17 @@ public class DirectorCamScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		/*
 		// Camera zoom control
 		if (Mathf.Abs(Input.mousePosition.x - prevMouseX) > 10f || Mathf.Abs(Input.mousePosition.y - prevMouseY) > 10f) {
 			lastMouseMoveTime = Time.timeSinceLevelLoad;
 			prevMouseX = Input.mousePosition.x;
 			prevMouseY = Input.mousePosition.y;
+		}
+		*/
+
+		if (Input.GetAxis ("Mouse X") > 0.1f || Input.GetAxis ("Mouse Y") > 0.1f) {
+			lastMouseMoveTime = Time.timeSinceLevelLoad;
 		}
 
 		float timeSinceLastMove = Time.timeSinceLevelLoad - lastMouseMoveTime;
