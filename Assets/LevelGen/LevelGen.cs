@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEditor;
 
 [System.Serializable]
 public class ChunkVert
@@ -246,6 +247,8 @@ public class LevelGen : NetworkBehaviour
                 if (realTiles[z, x])
                 {
                     GameObject temp = (GameObject)GameObject.Instantiate(wall);
+                    GameObjectUtility.SetStaticEditorFlags(temp, StaticEditorFlags.NavigationStatic);
+                    GameObjectUtility.SetNavMeshArea(temp, GameObjectUtility.GetNavMeshAreaFromName("Not Walkable"));
                     temp.transform.position = new Vector3(xPos, height / 2, zPos);
                     Vector3 newScale = Vector3.one;
                     if (x % 2 == 1)
@@ -262,6 +265,8 @@ public class LevelGen : NetworkBehaviour
             zPos += (1 + tileSize) / 2;
         }
         GameObject plane = (GameObject)GameObject.CreatePrimitive(PrimitiveType.Quad);
+        GameObjectUtility.SetStaticEditorFlags(plane, StaticEditorFlags.NavigationStatic);
+        GameObjectUtility.SetNavMeshArea(plane, GameObjectUtility.GetNavMeshAreaFromName("Walkable"));
         float realWorldSize = tileGridSize * (1 + tileSize) / 2 - .5f;
         plane.transform.position = new Vector3(realWorldSize / 2, 0, realWorldSize / 2);
         plane.transform.localScale = Vector3.one * realWorldSize;
@@ -269,6 +274,7 @@ public class LevelGen : NetworkBehaviour
         plane.GetComponent<MeshRenderer>().material.color = Color.gray;
         plane.transform.parent = transform;
         plane.layer = LayerMask.NameToLayer("Ground");
+        NavMeshBuilder.BuildNavMesh();
     }
 }
 
