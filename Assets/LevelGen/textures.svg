@@ -18,6 +18,17 @@
    sodipodi:docname="textures.svg">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient5098">
+      <stop
+         style="stop-color:#720000;stop-opacity:1;"
+         offset="0"
+         id="stop5100" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="1"
+         id="stop5102" />
+    </linearGradient>
     <marker
        inkscape:isstock="true"
        style="overflow:visible"
@@ -1020,15 +1031,15 @@
     <filter
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
-       id="filter17887"
-       x="-0.098194587"
-       width="1.1963892"
-       y="-0.098194587"
-       height="1.1963892">
+       id="filter6005"
+       x="-0.0876"
+       width="1.1752"
+       y="-0.0876"
+       height="1.1752">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="20.948178"
-         id="feGaussianBlur17889" />
+         stdDeviation="18.688"
+         id="feGaussianBlur6007" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -1038,9 +1049,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="-78.314663"
-     inkscape:cy="-334.48749"
+     inkscape:zoom="0.087499999"
+     inkscape:cx="-2616.2473"
+     inkscape:cy="-431.73313"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1065,7 +1076,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:8;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#3f0000;fill-opacity:1;stroke:none;stroke-width:8;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4686"
        width="1536"
        height="1536"
@@ -1174,7 +1185,7 @@
          style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5207-4-5-9-1)" />
     </g>
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:8;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#140000;fill-opacity:1;stroke:none;stroke-width:8;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4686-6"
        width="512"
        height="512"
@@ -1183,7 +1194,7 @@
        inkscape:export-xdpi="89.800003"
        inkscape:export-ydpi="89.800003" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#560000;stroke-width:75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4686-6-7"
        width="512"
        height="512"
@@ -1272,12 +1283,19 @@
          style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5207-4-5-9-1-8)" />
     </g>
     <rect
-       style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter17887)"
-       id="rect4686-6-7-9"
+       style="opacity:0;fill:#e50000;fill-opacity:1;stroke:#ff0000;stroke-width:75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4696"
+       width="1115.2084"
+       height="1115.2084"
+       x="-4856.8135"
+       y="-733.58752" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#560000;stroke-width:75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6005)"
+       id="rect4686-6-7-7"
        width="512"
        height="512"
        x="-1830.8572"
-       y="1988.3621"
+       y="1988.3622"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>
