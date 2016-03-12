@@ -111,17 +111,22 @@ public struct ChunkEdge
     }
 }
 
-
 public class LevelGen : NetworkBehaviour
 {
+    [SyncVar] int seed;
     public int size = 5;
     public int tileSize = 3;
     public int height = 3;
+
+    public GameObject wall;
 
     ChunkVert[,] verts;
 
     void Start()
     {
+        if (isServer)
+            seed = (int)System.DateTime.Now.Ticks;
+        Random.seed = seed;
         GenGraph();
         DrawLevel();
 
@@ -240,7 +245,7 @@ public class LevelGen : NetworkBehaviour
             {
                 if (realTiles[z, x])
                 {
-                    GameObject temp = (GameObject)GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    GameObject temp = (GameObject)GameObject.Instantiate(wall);
                     temp.transform.position = new Vector3(xPos, height / 2, zPos);
                     Vector3 newScale = Vector3.one;
                     if (x % 2 == 1)
@@ -249,6 +254,8 @@ public class LevelGen : NetworkBehaviour
                         newScale.z = tileSize;
                     newScale.y = height;
                     temp.transform.localScale = newScale;
+                    temp.transform.parent = transform;
+                    temp.layer = LayerMask.NameToLayer("Wall");
                 }
                 xPos += (1 + tileSize) / 2;
             }
@@ -258,9 +265,10 @@ public class LevelGen : NetworkBehaviour
         float realWorldSize = tileGridSize * (1 + tileSize) / 2 - .5f;
         plane.transform.position = new Vector3(realWorldSize / 2, 0, realWorldSize / 2);
         plane.transform.localScale = Vector3.one * realWorldSize;
-        plane.transform.rotation = Quaternion.Euler(90, 0, 0);
-        
+        plane.transform.rotation = Quaternion.Euler(90, 0, 0);        
         plane.GetComponent<MeshRenderer>().material.color = Color.gray;
+        plane.transform.parent = transform;
+        plane.layer = LayerMask.NameToLayer("Ground");
     }
 }
 

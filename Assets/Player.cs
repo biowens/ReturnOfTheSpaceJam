@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEnine.Networking
+using UnityEngine.Networking;
 
-public class Player : Network {
+public class Player : NetworkBehaviour {
+    public float directorSpeed;
 
 	void Start () {
 	
 	}
 	
-	void Update () {
-	
-	}
+	void Update ()
+    {
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * directorSpeed * Time.deltaTime;
+    }
 }
